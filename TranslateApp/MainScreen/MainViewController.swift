@@ -6,7 +6,6 @@ protocol MainView: class {
     
     func didUpdateState(_ state: MainPresenter.State)
     func getTextForTranslation() -> String
-    func getTableView() -> UITableView
 }
 
 class MainViewController: UIViewController {
@@ -41,6 +40,11 @@ extension MainViewController: MainView {
             activity.color = .orange
             tableView.backgroundView = activity
         case .error(let error):
+            let label = UILabel(frame: tableView.bounds)
+            label.text = error
+            label.textAlignment = .center
+            label.textColor = .red
+            tableView.backgroundView = label
             print(error)
         }
     }
@@ -66,12 +70,12 @@ extension MainViewController: UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getArrayOfTranslatedWords().count
+        return presenter.getTranslatedWords().count
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = presenter.getArrayOfTranslatedWords()[indexPath.row]
+        cell.textLabel?.text = presenter.getTranslatedWords()[indexPath.row]
         return cell
     }
 }
@@ -84,18 +88,18 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     internal func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return presenter.getLanguages().count
+        return presenter.getAllLanguages().count
     }
     
     internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return presenter.getLanguages()[row]
+        return presenter.getAllLanguages()[row]
     }
     
     internal func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == languagePickerFrom {
-            presenter.setPickerFromValue(value: presenter.getLanguages()[row])
+            presenter.setOriginal(language: presenter.getAllLanguages()[row])
         } else {
-            presenter.setPickerToValue(value: presenter.getLanguages()[row])
+            presenter.setTarget(language: presenter.getAllLanguages()[row])
 
         }
     }

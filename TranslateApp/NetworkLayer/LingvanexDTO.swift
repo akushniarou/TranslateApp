@@ -42,6 +42,4 @@ struct LingvanexDTO: TranslateService{
             print(error.localizedDescription)
         }
     }
-    
-    
 }

@@ -1,16 +1,31 @@
 
 import Foundation
 
+/*
+ языкПервода
+ языкОригинала
+ слово
+ пеервод
+ 
+ 
+ БД
+ языкПервода
+ языкОригинала
+ слово
+ пеервод
+ имяИзображения
+ */
+
 protocol MainViewPresenter {
     init()
     func addView(view: MainView)
     func getTranslation()
-    func getLanguages() -> Array<String>
-    func getArrayOfTranslatedWords() -> Array<String>
-    func getSelectedValueInPickerViewTo() -> String
-    func getSelectedValueInPickerViewFrom() -> String
-    func setPickerFromValue(value: String)
-    func setPickerToValue(value: String)
+    func getAllLanguages() -> Array<String>
+    func getTranslatedWords() -> Array<String>
+    func getTargetLanguage() -> String
+    func getOriginalLanguage() -> String
+    func setOriginal(language: String)
+    func setTarget(language: String)
 }
 
 internal enum Language: String, CaseIterable {
@@ -27,7 +42,7 @@ internal enum Language: String, CaseIterable {
     case arabic = "arabic"
     case polish = "polish"
     
-    var code: String {
+    var title: String {
         return rawValue
     }
     
@@ -56,24 +71,21 @@ internal enum Language: String, CaseIterable {
 }
 
 class MainPresenter: MainViewPresenter {
-    func getSelectedValueInPickerViewTo() -> String {
-        return selectedValueInPickerViewTo
+    
+    required init() {
+        
     }
-    
-    func getSelectedValueInPickerViewFrom() -> String {
-        return selectedValueInPickerViewFrom
+
+    enum State {
+        case normal
+        case loading
+        case error(String)
     }
-    
-    
-    
-    private var arrayOfTranslatedWords = [String]()
+        
+    private var translatedWords = [String]()
     private var translateFrom = Language.english
-    private var translateTo = Language.english
-    internal var languages = [String]()
-    private var selectedValueInPickerViewTo: String = Language.english.code
-    private var selectedValueInPickerViewFrom: String = Language.english.code
-    
-    
+    private var translateTo = Language.russian
+
     //    private let translateService: [TranslateService]!
     private var translationRequest = TranslateRequest()
     private weak var view: MainView?
@@ -82,76 +94,68 @@ class MainPresenter: MainViewPresenter {
             self.view?.didUpdateState(state)
         }
     }
+
     
-    enum State {
-        case normal
-        case loading
-        case error(String)
+    //MARK: - MainViewPresenter protocol
+    func getTargetLanguage() -> String {
+        return translateTo.title
+    }
+    
+    func getOriginalLanguage() -> String {
+        return translateFrom.title
     }
     
     internal func addView(view: MainView) {
         self.view = view
     }
     
-    required init () {
-        for lang in Language.allCases {
-            languages.append(lang.code)
-        }
-    }
-    
     internal func getTranslation() {
-        arrayOfTranslatedWords.removeAll()
-        setTranslationDestination()
+        guard let translatedWord = view?.getTextForTranslation(),
+              !translatedWord.isEmpty
+        else { return }
+        
+        translatedWords.removeAll()
         view?.reloadData()
         
-        guard let translatedWord = view?.getTextForTranslation(), translatedWord.count != 0 else { return }
         self.state = .loading
-        translationRequest.fetchTranslate(from: translateFrom, to: translateTo, data: translatedWord) { translationResult in
+        translationRequest.fetchTranslate(
+            from: translateFrom,
+            to: translateTo,
+            data: translatedWord
+        ) { [weak self] translationResult in
+            
             DispatchQueue.main.async {
-                self.setWordsToTranslationArray(word: translationResult.result)
-                self.state = .normal
+                self?.addTranslated(word: translationResult.result)
+                self?.state = .normal
             }
         }
     }
     
-    internal func setTranslationDestination() {
-        for lang in Language.allCases {
-            if lang.code == getPickerFromValue().code {
-                translateFrom = getPickerFromValue()
-            }
-            if lang.code == getPickerToValue().code {
-                translateTo = getPickerToValue()
-            }
+    func getAllLanguages() -> Array<String> {
+        return Language.allCases.map{$0.title}
+    }
+    
+    internal func setOriginal(language: String) {
+        guard let language = Language.init(rawValue: language) else {
+            return
         }
+        translateFrom = language
     }
     
-    func getLanguages() -> Array<String> {
-        return languages
+    internal func setTarget(language: String) {
+        guard let language = Language.init(rawValue: language) else {
+            return
+        }
+        translateTo = language
     }
     
-    internal func getPickerFromValue() -> Language {
-        return Language.init(rawValue: (selectedValueInPickerViewFrom))!
+    internal func getTranslatedWords() -> Array<String> {
+        return translatedWords
     }
     
-    internal func getPickerToValue() -> Language {
-        return Language.init(rawValue: (selectedValueInPickerViewTo))!
-    }
-    
-    internal func setPickerFromValue(value: String) {
-        selectedValueInPickerViewFrom = value
-    }
-    
-    internal func setPickerToValue(value: String) {
-        selectedValueInPickerViewTo = value
-    }
-    
-    internal func getArrayOfTranslatedWords() -> Array<String> {
-        return arrayOfTranslatedWords
-    }
-    
-    internal func setWordsToTranslationArray(word: String) {
-        arrayOfTranslatedWords = [word.capitalized]
-        view?.getTableView().reloadData()
+    private func addTranslated(word: String) {
+        translatedWords = [word.capitalized]
+        view?.reloadData()
     }
 }
 

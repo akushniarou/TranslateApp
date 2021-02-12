@@ -23,7 +23,6 @@ class TranslateRequest {
             dispatchGroup.leave()
         })
         dispatchGroup.notify(queue: .main) {
-        print(self.translateResult.count)
         completionHandler(self.translateResult[0])
         }
     }
