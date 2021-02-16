@@ -6,7 +6,7 @@ struct LingvanexDTO: TranslateService{
     private let apiUrl = lingvanexUrlString
     private let apiKey = lingvanexApiKey
     
-    func fetchTranslate(word: String, from: Language, to: Language, completionHandler: @escaping (TranslateResult) -> Void) {
+    func fetchTranslate(word: String, from: MainPresenter.Language, to: MainPresenter.Language, completionHandler: @escaping (TranslateResult) -> Void) {
         
         let uploadedData = UploadData(from: from.locale, to: to.locale, data: word, platform: "api")
         

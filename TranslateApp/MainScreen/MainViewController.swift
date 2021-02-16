@@ -50,7 +50,7 @@ extension MainViewController: MainView {
     }
     
     internal func getTextForTranslation() -> String {
-        return inputField.text ?? ""
+        return inputField.text?.lowercased() ?? ""
     }
     
     internal func reloadData() {

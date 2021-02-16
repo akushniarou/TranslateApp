@@ -2,9 +2,9 @@
 import Foundation
 
 struct TranslateResult {
-    let fromLanguage: Language
+    let fromLanguage: MainPresenter.Language
     let translated: String
-    let translateLanguage: Language
+    let translateLanguage: MainPresenter.Language
     let result: String
     
     let anotherTranslated: [String]?

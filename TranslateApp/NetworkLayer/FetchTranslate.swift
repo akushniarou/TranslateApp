@@ -3,7 +3,7 @@ import Foundation
 
 
 protocol TranslateService {
-    func fetchTranslate(word: String, from: Language, to: Language, completionHandler: @escaping (TranslateResult) -> Void)
+    func fetchTranslate(word: String, from: MainPresenter.Language, to: MainPresenter.Language, completionHandler: @escaping (TranslateResult) -> Void)
 }
 
 class TranslateRequest {
@@ -14,16 +14,24 @@ class TranslateRequest {
         translateResult.append(result)
     }
     
-    func fetchTranslate(from: Language, to: Language, data: String, completionHandler: @escaping (TranslateResult) -> Void) {
-        dispatchGroup.enter()
-        translateResult.removeAll()
+    func fetchTranslate(from: MainPresenter.Language, to: MainPresenter.Language, data: String, completionHandler: @escaping (TranslateResult) -> Void) {
         let ldto = LingvanexDTO()
-        ldto.fetchTranslate(word: data, from: from, to: to, completionHandler: { [self] result in
-            self.appendResult(result: result)
-            dispatchGroup.leave()
-        })
-        dispatchGroup.notify(queue: .main) {
-        completionHandler(self.translateResult[0])
-        }
+        let ldto2 = LingvanexDTO2()
+        let ldto3 = LingvanexDTO3()
+        let ldto4 = LingvanexDTO4()
+    
+        translateResult.removeAll()
+        
+        dispatchGroup.enter()
+        
+        ldto.fetchTranslate(word: data, from: from, to: to, completionHandler: completionHandler)
+        
+        ldto2.fetchTranslate(word: data, from: from, to: to, completionHandler: completionHandler)
+        
+        ldto3.fetchTranslate(word: data, from: from, to: to, completionHandler: completionHandler)
+        
+        ldto4.fetchTranslate(word: data, from: from, to: to, completionHandler: completionHandler)
+        
+        dispatchGroup.leave()
     }
 }
