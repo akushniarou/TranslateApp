@@ -11,6 +11,7 @@ protocol MainView: class {
 class MainViewController: UIViewController {
     
     private var presenter: MainViewPresenter = MainPresenter()
+    private var selectedCellContent: TranslateResult?
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var inputField: UITextField!
@@ -23,13 +24,20 @@ class MainViewController: UIViewController {
         presenter.addView(view: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? DetailedViewController {
+            
+            controller.translatedWordFromTable = selectedCellContent
+        }
+    }
+    
     @IBAction private func getTranslation(_ sender: Any) {
         presenter.getTranslation()
     }
 }
 
 extension MainViewController: MainView {
-
+    
     func didUpdateState(_ state: MainPresenter.State) {
         switch state {
         case .normal:
@@ -70,13 +78,21 @@ extension MainViewController: UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getTranslatedWords().count
+        return presenter.getTranslationData().count
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = presenter.getTranslatedWords()[indexPath.row]
+        cell.textLabel?.text = presenter.getTranslationData()[indexPath.row].result
         return cell
+    }
+}
+
+//MARK: - content from selected cell
+extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedCellContent = presenter.getTranslationData()[indexPath.row]
+        performSegue(withIdentifier: "toDetailedView", sender: self)
     }
 }
 
@@ -100,7 +116,7 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             presenter.setOriginal(language: presenter.getAllLanguages()[row])
         } else {
             presenter.setTarget(language: presenter.getAllLanguages()[row])
-
+            
         }
     }
 }

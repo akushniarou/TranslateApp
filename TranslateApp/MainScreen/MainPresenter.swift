@@ -22,11 +22,12 @@ protocol MainViewPresenter {
     func addView(view: MainView)
     func getTranslation()
     func getAllLanguages() -> Array<String>
-    func getTranslatedWords() -> Array<String>
+    func getTranslationData() -> Array<TranslateResult>
     func getTargetLanguage() -> String
     func getOriginalLanguage() -> String
     func setOriginal(language: String)
     func setTarget(language: String)
+    func getContextData()
 }
 
 class MainPresenter: MainViewPresenter {
@@ -41,9 +42,9 @@ class MainPresenter: MainViewPresenter {
         case error(String)
     }
         
-    private var translatedWords = [String]()
+    private var translationData = [TranslateResult]()
     private var translateFrom = Language.english
-    private var translateTo = Language.russian
+    private var translateTo = Language.english
 
     //    private let translateService: [TranslateService]!
     private var translationRequest = TranslateRequest()
@@ -73,7 +74,7 @@ class MainPresenter: MainViewPresenter {
               !translatedWord.isEmpty
         else { return }
         
-        translatedWords.removeAll()
+        translationData.removeAll()
         view?.reloadData()
         
         self.state = .loading
@@ -84,7 +85,7 @@ class MainPresenter: MainViewPresenter {
         ) { [weak self] translationResult in
             
             DispatchQueue.main.async {
-                self?.addTranslated(word: translationResult.result)
+                self?.addTranslated(word: translationResult)
                 self?.state = .normal
             }
         }
@@ -108,12 +109,16 @@ class MainPresenter: MainViewPresenter {
         translateTo = language
     }
     
-    internal func getTranslatedWords() -> Array<String> {
-        return translatedWords
+    internal func getTranslationData() -> Array<TranslateResult> {
+        return translationData
     }
     
-    private func addTranslated(word: String) {
-        translatedWords.append(word.capitalized)
+    internal func getContextData() {
+        
+    }
+    
+    private func addTranslated(word: TranslateResult) {
+        translationData.append(word)
         view?.reloadData()
     }
 }
