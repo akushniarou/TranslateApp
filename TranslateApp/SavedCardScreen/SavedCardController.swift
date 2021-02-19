@@ -9,6 +9,8 @@ class SavedCardController: UITableViewController {
     
     private var presenter: SavedCardPresenter = SavedPresenter()
     
+    private var tasks = [String]()
+    
     override internal func viewDidLoad() {
         super.viewDidLoad()
         presenter.addView(view: self)
@@ -31,12 +33,11 @@ extension SavedCardController {
     }
     
     override internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return tasks.count
     }
     
     override internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "savedCardCell", for: indexPath) as UITableViewCell
-
         
         return cell
     }
