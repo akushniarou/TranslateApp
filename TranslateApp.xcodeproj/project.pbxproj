@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A0639F525DFF31200B12534 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0639F425DFF31200B12534 /* Task+CoreDataClass.swift */; };
+		7A0639F625DFF31200B12534 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0639F325DFF31200B12534 /* Task+CoreDataProperties.swift */; };
 		7A1812AB25DD147C0049A570 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1812AA25DD147C0049A570 /* DetailedViewController.swift */; };
 		7A1812AF25DD14A80049A570 /* DetailedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1812AE25DD14A80049A570 /* DetailedPresenter.swift */; };
 		7A2B972125DCFDAE00211844 /* SavedCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2B972025DCFDAE00211844 /* SavedCardCell.swift */; };
@@ -32,11 +34,14 @@
 		7A6BDC4F25CC39EC00E69447 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A6BDC4C25CC39EC00E69447 /* Assets.xcassets */; };
 		7A6BDC5025CC39EC00E69447 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A6BDC4D25CC39EC00E69447 /* LaunchScreen.storyboard */; };
 		7AD0D6EC25D2B833007F2EA7 /* LingvanexDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0D6EB25D2B833007F2EA7 /* LingvanexDTO.swift */; };
+		7AF4794925DFA5F500D418B1 /* CDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF4794825DFA5F500D418B1 /* CDM.swift */; };
 		8D17C886FDC30262CD73FE1C /* Pods_TranslateApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0615669C5DE7E6728EA374BF /* Pods_TranslateApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0615669C5DE7E6728EA374BF /* Pods_TranslateApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslateApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A0639F325DFF31200B12534 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataProperties.swift"; path = "/Users/arturkushniarou/Desktop/Developer/TranslateApp/TranslateApp/CoreData/Task+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		7A0639F425DFF31200B12534 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataClass.swift"; path = "/Users/arturkushniarou/Desktop/Developer/TranslateApp/TranslateApp/CoreData/Task+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		7A1812AA25DD147C0049A570 /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
 		7A1812AE25DD14A80049A570 /* DetailedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPresenter.swift; sourceTree = "<group>"; };
 		7A2B972025DCFDAE00211844 /* SavedCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCardCell.swift; sourceTree = "<group>"; };
@@ -64,6 +69,7 @@
 		7A6BDC4C25CC39EC00E69447 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A6BDC4D25CC39EC00E69447 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7AD0D6EB25D2B833007F2EA7 /* LingvanexDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingvanexDTO.swift; sourceTree = "<group>"; };
+		7AF4794825DFA5F500D418B1 /* CDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDM.swift; sourceTree = "<group>"; };
 		862901DF8F4DFD23F22FEFEF /* Pods-TranslateApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslateApp.release.xcconfig"; path = "Target Support Files/Pods-TranslateApp/Pods-TranslateApp.release.xcconfig"; sourceTree = "<group>"; };
 		CA21DC50CFE39791F53BC582 /* Pods-TranslateApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslateApp.debug.xcconfig"; path = "Target Support Files/Pods-TranslateApp/Pods-TranslateApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +104,16 @@
 			path = DetailedScreen;
 			sourceTree = "<group>";
 		};
+		7A22E28E25DEA8E200C21427 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7A0639F425DFF31200B12534 /* Task+CoreDataClass.swift */,
+				7A0639F325DFF31200B12534 /* Task+CoreDataProperties.swift */,
+				7AF4794825DFA5F500D418B1 /* CDM.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		7A636B8425DBDAB300A4FBAF /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +146,7 @@
 		7A6BDC0B25CC399B00E69447 /* TranslateApp */ = {
 			isa = PBXGroup;
 			children = (
+				7A22E28E25DEA8E200C21427 /* CoreData */,
 				7A6BDC3725CC39D000E69447 /* Constants */,
 				7A6BDC2925CC39D000E69447 /* Helpers */,
 				7AD0D6EE25D2B996007F2EA7 /* ApiModel */,
@@ -344,12 +361,15 @@
 				7A6BDC1725CC399B00E69447 /* TranslateApp.xcdatamodeld in Sources */,
 				7A2B972125DCFDAE00211844 /* SavedCardCell.swift in Sources */,
 				7A6BDC4525CC39D000E69447 /* SavedPresenter.swift in Sources */,
+				7A0639F525DFF31200B12534 /* Task+CoreDataClass.swift in Sources */,
 				7A6BDC4825CC39D000E69447 /* FetchTranslate.swift in Sources */,
 				7A6BDC3F25CC39D000E69447 /* ParsedDataModel.swift in Sources */,
+				7A0639F625DFF31200B12534 /* Task+CoreDataProperties.swift in Sources */,
 				7A636B8225DBCD9F00A4FBAF /* LingvanexDTO4.swift in Sources */,
 				7A6BDC4225CC39D000E69447 /* MainViewController.swift in Sources */,
 				7A6BDC4425CC39D000E69447 /* MainPresenter.swift in Sources */,
 				7A1812AB25DD147C0049A570 /* DetailedViewController.swift in Sources */,
+				7AF4794925DFA5F500D418B1 /* CDM.swift in Sources */,
 				7A6BDC4725CC39D000E69447 /* ParseResponse.swift in Sources */,
 				7A6BDC4025CC39D000E69447 /* UploadDataModel.swift in Sources */,
 				7A636B7F25DBCD9600A4FBAF /* LingvanexDTO3.swift in Sources */,

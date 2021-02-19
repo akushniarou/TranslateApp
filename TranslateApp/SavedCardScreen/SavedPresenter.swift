@@ -4,7 +4,6 @@ import Foundation
 protocol SavedCardPresenter{
     init()
     func addView(view: SaveCardView)
-    func getSavedCards() -> [String]
 }
 
 class SavedPresenter: SavedCardPresenter {
@@ -18,9 +17,5 @@ class SavedPresenter: SavedCardPresenter {
     }
     
     required init() {
-    }
-    
-    func getSavedCards() -> [String] {
-        return savedCards
     }
 }
