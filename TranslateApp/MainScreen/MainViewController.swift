@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
     override internal func viewDidLoad() {
         super.viewDidLoad()
         presenter.addView(view: self)
+        hideKeyboardWhenTappedAround() 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

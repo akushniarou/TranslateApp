@@ -2,6 +2,11 @@
 import UIKit
 
 protocol DetailedView: class {
+    func getOriginalLanguage() -> String?
+    func getTargetLanguage() -> String?
+    func getOriginalWord() -> String?
+    func getTranslatedWord() -> String?
+    func getTranslationImage() -> Data?
 }
 
 class DetailedViewController: UIViewController {
@@ -25,7 +30,7 @@ class DetailedViewController: UIViewController {
         }
     }
     private var presenter: DetailedViewPresenter = DetailedPresenter()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.addView(view: self)
@@ -34,6 +39,11 @@ class DetailedViewController: UIViewController {
         targetLanguage.text = translatedWordFromTable?.translateLanguage.title
         originalWord.text = translatedWordFromTable?.translated
         translatedWord.text = translatedWordFromTable?.result
+    }
+    
+    @IBAction func saveButton(_ sender: UIButton) {
+        presenter.saveTask()
+        dismiss(animated: true)
     }
 }
 
@@ -76,4 +86,45 @@ extension DetailedViewController: UIImagePickerControllerDelegate, UINavigationC
 
 extension DetailedViewController: DetailedView {
     
+    func getOriginalLanguage() -> String? {
+        if let word = translatedWordFromTable?.fromLanguage.title {
+            return word
+        } else {
+            return ""
+        }
+    }
+    
+    func getTargetLanguage() -> String? {
+        if let word = translatedWordFromTable?.translateLanguage.title{
+            return word
+        } else {
+            return ""
+        }
+    }
+    
+    func getOriginalWord() -> String? {
+        if let word = translatedWordFromTable?.translated {
+            return word
+        } else {
+            return ""
+        }
+    }
+    
+    func getTranslatedWord() -> String? {
+        if let word = translatedWordFromTable?.result {
+            return word
+        } else {
+            return ""
+        }
+    }
+    
+    func getTranslationImage() -> Data? {
+        if let image = translationImage {
+            return image.pngData()
+        } else {
+            return nil
+            
+        }
+    }
 }
+
