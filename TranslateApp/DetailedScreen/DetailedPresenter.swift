@@ -4,6 +4,7 @@ import Foundation
 protocol DetailedViewPresenter{
     init()
     func addView(view: DetailedView)
+    func saveTask()
 }
 
 class DetailedPresenter: DetailedViewPresenter{
@@ -15,5 +16,15 @@ class DetailedPresenter: DetailedViewPresenter{
     }
     
     required init() {
+    }
+    
+    func saveTask() {
+        let obj = Task(context: context)
+        obj.enteredWord = view?.getOriginalWord()
+        obj.originalLanguage = view?.getOriginalLanguage()
+        obj.picture = view?.getTranslationImage()
+        obj.targetLanguage = view?.getTargetLanguage()
+        obj.translatedWord = view?.getTranslatedWord()
+        saveContext()
     }
 }
