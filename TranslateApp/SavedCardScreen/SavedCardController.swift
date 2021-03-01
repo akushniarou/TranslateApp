@@ -54,4 +54,18 @@ extension SavedCardController {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let task = tasks[indexPath.row] as Task?, editingStyle == .delete else { return }
+        
+        context.delete(task)
+        tasks.remove(at: indexPath.row)
+        
+        do {
+            try context.save()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+    }
 }
