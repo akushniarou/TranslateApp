@@ -13,7 +13,7 @@ class SavedCardController: UITableViewController {
     private var tasks = [Task]()
     private var cells =  SavedCardCell()
     
-    override func loadView() {
+    override internal func loadView() {
         super.loadView()
         tasks = presenter.getObjects()
     }
@@ -25,7 +25,7 @@ class SavedCardController: UITableViewController {
 }
 
 extension SavedCardController: SaveCardView {
-    func getCell() -> UITableViewCell {
+    internal func getCell() -> UITableViewCell {
         return cells
     }
 }
@@ -55,7 +55,7 @@ extension SavedCardController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override internal func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard let task = tasks[indexPath.row] as Task?, editingStyle == .delete else { return }
         
         context.delete(task)

@@ -25,7 +25,7 @@ class MainViewController: UIViewController {
         hideKeyboardWhenTappedAround() 
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override internal func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? DetailedViewController {
             
             controller.translatedWordFromTable = selectedCellContent
@@ -39,7 +39,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: MainView {
     
-    func didUpdateState(_ state: MainPresenter.State) {
+    internal func didUpdateState(_ state: MainPresenter.State) {
         switch state {
         case .normal:
             self.tableView.backgroundView = nil
@@ -66,7 +66,7 @@ extension MainViewController: MainView {
         tableView.reloadData()
     }
     
-    func getTableView() -> UITableView {
+    private func getTableView() -> UITableView {
         return tableView
     }
 }
@@ -91,7 +91,7 @@ extension MainViewController: UITableViewDataSource {
 
 //MARK: - content from selected cell
 extension MainViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedCellContent = presenter.getTranslationData()[indexPath.row]
         performSegue(withIdentifier: "toDetailedView", sender: self)
     }

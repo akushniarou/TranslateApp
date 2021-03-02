@@ -18,7 +18,7 @@ class DetailedPresenter: DetailedViewPresenter{
     required init() {
     }
     
-    func saveTask() {
+    internal func saveTask() {
         let obj = Task(context: context)
         obj.enteredWord = view?.getOriginalWord()
         obj.originalLanguage = view?.getOriginalLanguage()

@@ -11,7 +11,7 @@ protocol DetailedView: class {
 
 class DetailedViewController: UIViewController {
     
-    var translatedWordFromTable: TranslateResult?
+    internal var translatedWordFromTable: TranslateResult?
     
     @IBOutlet private weak var originalLanguage: UILabel!
     @IBOutlet private weak var targetLanguage: UILabel!
@@ -31,7 +31,7 @@ class DetailedViewController: UIViewController {
     }
     private var presenter: DetailedViewPresenter = DetailedPresenter()
     
-    override func viewDidLoad() {
+    override internal func viewDidLoad() {
         super.viewDidLoad()
         presenter.addView(view: self)
         
@@ -41,7 +41,7 @@ class DetailedViewController: UIViewController {
         translatedWord.text = translatedWordFromTable?.result
     }
     
-    @IBAction func saveButton(_ sender: UIButton) {
+    @IBAction private func saveButton(_ sender: UIButton) {
         presenter.saveTask()
         dismiss(animated: true)
     }
@@ -49,7 +49,7 @@ class DetailedViewController: UIViewController {
 
 extension DetailedViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBAction func choosePictureButton(_ sender: UIButton) {
+    @IBAction private func choosePictureButton(_ sender: UIButton) {
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -70,7 +70,7 @@ extension DetailedViewController: UIImagePickerControllerDelegate, UINavigationC
         present(actionSheet, animated: true)
     }
     
-    func chooseImagePicker(source: UIImagePickerController.SourceType) {
+    private func chooseImagePicker(source: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
@@ -78,7 +78,7 @@ extension DetailedViewController: UIImagePickerControllerDelegate, UINavigationC
         present(imagePicker, animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         translationImage = info[.editedImage] as? UIImage
         dismiss(animated: true)
     }
@@ -86,7 +86,7 @@ extension DetailedViewController: UIImagePickerControllerDelegate, UINavigationC
 
 extension DetailedViewController: DetailedView {
     
-    func getOriginalLanguage() -> String? {
+    internal func getOriginalLanguage() -> String? {
         if let word = translatedWordFromTable?.fromLanguage.title {
             return word
         } else {
@@ -94,7 +94,7 @@ extension DetailedViewController: DetailedView {
         }
     }
     
-    func getTargetLanguage() -> String? {
+    internal func getTargetLanguage() -> String? {
         if let word = translatedWordFromTable?.translateLanguage.title{
             return word
         } else {
@@ -102,7 +102,7 @@ extension DetailedViewController: DetailedView {
         }
     }
     
-    func getOriginalWord() -> String? {
+    internal func getOriginalWord() -> String? {
         if let word = translatedWordFromTable?.translated {
             return word
         } else {
@@ -110,7 +110,7 @@ extension DetailedViewController: DetailedView {
         }
     }
     
-    func getTranslatedWord() -> String? {
+    internal  func getTranslatedWord() -> String? {
         if let word = translatedWordFromTable?.result {
             return word
         } else {
@@ -118,7 +118,7 @@ extension DetailedViewController: DetailedView {
         }
     }
     
-    func getTranslationImage() -> Data? {
+    internal  func getTranslationImage() -> Data? {
         if let image = translationImage {
             return image.pngData()
         } else {
