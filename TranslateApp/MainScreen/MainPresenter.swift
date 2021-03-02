@@ -36,7 +36,7 @@ class MainPresenter: MainViewPresenter {
         
     }
 
-    enum State {
+    internal enum State {
         case normal
         case loading
         case error(String)
@@ -57,11 +57,11 @@ class MainPresenter: MainViewPresenter {
 
     
     //MARK: - MainViewPresenter protocol
-    func getTargetLanguage() -> String {
+    internal func getTargetLanguage() -> String {
         return translateTo.title
     }
     
-    func getOriginalLanguage() -> String {
+    internal func getOriginalLanguage() -> String {
         return translateFrom.title
     }
     
@@ -91,7 +91,7 @@ class MainPresenter: MainViewPresenter {
         }
     }
     
-    func getAllLanguages() -> Array<String> {
+    internal func getAllLanguages() -> Array<String> {
         return Language.allCases.map{$0.title}
     }
     
