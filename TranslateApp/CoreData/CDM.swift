@@ -28,6 +28,6 @@ func saveContext () {
     }
 }
 
-let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+let fetchRequest: NSFetchRequest<CoreDataTask> = CoreDataTask.fetchRequest()
 
 

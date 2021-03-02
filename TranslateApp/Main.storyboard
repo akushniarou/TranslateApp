@@ -66,28 +66,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L0p-iw-Tz3">
                                 <rect key="frame" x="10" y="108" width="394" height="125"/>
                                 <subviews>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJj-pL-TaQ">
-                                        <rect key="frame" x="224" y="22" width="160" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="160" id="A28-X6-VLs"/>
-                                            <constraint firstAttribute="height" constant="80" id="zOJ-ae-Jro"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="dataSource" destination="aai-lx-cdF" id="EBA-fQ-3to"/>
-                                            <outlet property="delegate" destination="aai-lx-cdF" id="ERk-Mg-CNm"/>
-                                        </connections>
-                                    </pickerView>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vB7-6q-Qts">
-                                        <rect key="frame" x="10" y="22" width="160" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="160" id="AY1-6d-I4f"/>
-                                            <constraint firstAttribute="height" constant="80" id="JhY-vu-THK"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="dataSource" destination="aai-lx-cdF" id="I6Q-Ra-6wW"/>
-                                            <outlet property="delegate" destination="aai-lx-cdF" id="Wmb-Nm-ebJ"/>
-                                        </connections>
-                                    </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzJ-R4-sMY">
                                         <rect key="frame" x="294.5" y="2" width="19" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -100,18 +78,32 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bES-Nj-HyC" customClass="ChoosePickerView" customModule="TranslateApp" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="22" width="160" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="68U-Hi-1C7"/>
+                                            <constraint firstAttribute="width" constant="160" id="BXK-TV-LAY"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qyg-Lu-4Pu" customClass="ChoosePickerView" customModule="TranslateApp" customModuleProvider="target">
+                                        <rect key="frame" x="224" y="22" width="160" height="80"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="160" id="FUj-Od-JbF"/>
+                                            <constraint firstAttribute="height" constant="80" id="gxV-fC-SVG"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="vB7-6q-Qts" secondAttribute="bottom" constant="23" id="CUb-sZ-nLi"/>
-                                    <constraint firstItem="vB7-6q-Qts" firstAttribute="top" secondItem="fFm-If-AW2" secondAttribute="bottom" constant="-1" id="CWb-Nh-PC8"/>
-                                    <constraint firstItem="fFm-If-AW2" firstAttribute="centerX" secondItem="vB7-6q-Qts" secondAttribute="centerX" id="DpY-Lh-9fv"/>
-                                    <constraint firstItem="vB7-6q-Qts" firstAttribute="leading" secondItem="L0p-iw-Tz3" secondAttribute="leading" constant="10" id="Fy3-97-o7d"/>
                                     <constraint firstItem="fFm-If-AW2" firstAttribute="top" secondItem="L0p-iw-Tz3" secondAttribute="top" constant="2" id="HAI-dE-nXa"/>
-                                    <constraint firstItem="bzJ-R4-sMY" firstAttribute="centerX" secondItem="aJj-pL-TaQ" secondAttribute="centerX" id="PVg-7F-Iuk"/>
-                                    <constraint firstAttribute="bottom" secondItem="aJj-pL-TaQ" secondAttribute="bottom" constant="23" id="VzZ-di-tPo"/>
-                                    <constraint firstAttribute="trailing" secondItem="aJj-pL-TaQ" secondAttribute="trailing" constant="10" id="XEL-p3-DgB"/>
+                                    <constraint firstItem="fFm-If-AW2" firstAttribute="centerX" secondItem="bES-Nj-HyC" secondAttribute="centerX" id="LuU-5i-mEg"/>
+                                    <constraint firstItem="Qyg-Lu-4Pu" firstAttribute="top" secondItem="bzJ-R4-sMY" secondAttribute="bottom" constant="-1" id="Pnd-Eg-4G4"/>
+                                    <constraint firstItem="bES-Nj-HyC" firstAttribute="top" secondItem="fFm-If-AW2" secondAttribute="bottom" constant="-1" id="ei5-9N-421"/>
                                     <constraint firstAttribute="height" constant="125" id="k64-I2-pQb"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qyg-Lu-4Pu" secondAttribute="trailing" constant="10" id="od5-9J-tVG"/>
+                                    <constraint firstItem="bES-Nj-HyC" firstAttribute="leading" secondItem="L0p-iw-Tz3" secondAttribute="leading" constant="10" id="r7u-3C-5zC"/>
+                                    <constraint firstItem="bzJ-R4-sMY" firstAttribute="centerX" secondItem="Qyg-Lu-4Pu" secondAttribute="centerX" id="wAd-XW-oIJ"/>
                                     <constraint firstItem="bzJ-R4-sMY" firstAttribute="top" secondItem="L0p-iw-Tz3" secondAttribute="top" constant="2" id="zlL-YI-dXc"/>
                                 </constraints>
                             </view>
@@ -138,15 +130,15 @@
                     </view>
                     <connections>
                         <outlet property="inputField" destination="aBM-xc-VJk" id="1mw-DK-CKk"/>
-                        <outlet property="languagePickerFrom" destination="vB7-6q-Qts" id="hcc-eb-28c"/>
-                        <outlet property="languagePickerTo" destination="aJj-pL-TaQ" id="fkE-3b-B9o"/>
+                        <outlet property="languagePickerFrom" destination="bES-Nj-HyC" id="m4H-zt-vr7"/>
+                        <outlet property="languagePickerTo" destination="Qyg-Lu-4Pu" id="GQR-Na-Qek"/>
                         <outlet property="tableView" destination="Nk3-kw-LH2" id="4qL-N3-rd0"/>
                         <segue destination="mzd-aN-KNU" kind="show" identifier="toDetailedView" id="6MZ-yz-tpb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iV-XD-zng" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="202.89855072463769" y="-269.02173913043481"/>
+            <point key="canvasLocation" x="202.89855072463769" y="-269.19642857142856"/>
         </scene>
         <!--Detailed View Controller-->
         <scene sceneID="Zd7-Ag-rax">

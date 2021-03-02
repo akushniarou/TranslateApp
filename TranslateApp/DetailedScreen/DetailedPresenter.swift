@@ -19,7 +19,7 @@ class DetailedPresenter: DetailedViewPresenter{
     }
     
     internal func saveTask() {
-        let obj = Task(context: context)
+        let obj = CoreDataTask(context: context)
         obj.enteredWord = view?.getOriginalWord()
         obj.originalLanguage = view?.getOriginalLanguage()
         obj.picture = view?.getTranslationImage()

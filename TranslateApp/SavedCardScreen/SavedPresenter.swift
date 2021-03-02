@@ -4,8 +4,8 @@ import Foundation
 protocol SavedCardPresenter{
     init()
     func addView(view: SaveCardView)
-    func addExistingCards(tasks: [Task])
-    func getObjects() -> [Task]
+    func addExistingCards(tasks: [CoreDataTask])
+    func getObjects() -> [CoreDataTask]
 }
 
 class SavedPresenter: SavedCardPresenter {
@@ -23,11 +23,11 @@ class SavedPresenter: SavedCardPresenter {
     required init() {
     }
     
-    internal func addExistingCards(tasks: [Task]) {
+    internal func addExistingCards(tasks: [CoreDataTask]) {
         
     }
     
-    internal func getObjects() -> [Task] {
+    internal func getObjects() -> [CoreDataTask] {
         let objects = try! context.fetch(fetchRequest)
         return objects
     }

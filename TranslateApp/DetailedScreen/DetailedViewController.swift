@@ -2,10 +2,10 @@
 import UIKit
 
 protocol DetailedView: class {
-    func getOriginalLanguage() -> String?
-    func getTargetLanguage() -> String?
-    func getOriginalWord() -> String?
-    func getTranslatedWord() -> String?
+    func getOriginalLanguage() -> String
+    func getTargetLanguage() -> String
+    func getOriginalWord() -> String
+    func getTranslatedWord() -> String
     func getTranslationImage() -> Data?
 }
 
@@ -63,7 +63,7 @@ extension DetailedViewController: UIImagePickerControllerDelegate, UINavigationC
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         
-        actionSheet.addAction(picture)
+        actionSheet.addAction(picture) //вынести в экстэншн
         actionSheet.addAction(camera)
         actionSheet.addAction(cancel)
         
@@ -86,36 +86,20 @@ extension DetailedViewController: UIImagePickerControllerDelegate, UINavigationC
 
 extension DetailedViewController: DetailedView {
     
-    internal func getOriginalLanguage() -> String? {
-        if let word = translatedWordFromTable?.fromLanguage.title {
-            return word
-        } else {
-            return ""
-        }
+    internal func getOriginalLanguage() -> String {
+        translatedWordFromTable?.fromLanguage.title ?? ""
     }
     
-    internal func getTargetLanguage() -> String? {
-        if let word = translatedWordFromTable?.translateLanguage.title{
-            return word
-        } else {
-            return ""
-        }
+    internal func getTargetLanguage() -> String {
+        translatedWordFromTable?.translateLanguage.title ?? ""
     }
     
-    internal func getOriginalWord() -> String? {
-        if let word = translatedWordFromTable?.translated {
-            return word
-        } else {
-            return ""
-        }
+    internal func getOriginalWord() -> String {
+        translatedWordFromTable?.translated ?? ""
     }
     
-    internal  func getTranslatedWord() -> String? {
-        if let word = translatedWordFromTable?.result {
-            return word
-        } else {
-            return ""
-        }
+    internal  func getTranslatedWord() -> String {
+        translatedWordFromTable?.result ?? ""
     }
     
     internal  func getTranslationImage() -> Data? {
@@ -123,7 +107,6 @@ extension DetailedViewController: DetailedView {
             return image.pngData()
         } else {
             return nil
-            
         }
     }
 }
