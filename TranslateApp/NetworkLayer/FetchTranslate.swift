@@ -23,15 +23,27 @@ class TranslateRequest {
         translateResult.removeAll()
         
         dispatchGroup.enter()
+        ldto.fetchTranslate(word: data, from: from, to: to, completionHandler: { [weak self] result in
+            completionHandler(result)
+            self?.dispatchGroup.leave()
+        })
         
-        ldto.fetchTranslate(word: data, from: from, to: to, completionHandler: completionHandler)
+        dispatchGroup.enter()
+        ldto2.fetchTranslate(word: data, from: from, to: to, completionHandler: { [weak self] result in
+            completionHandler(result)
+            self?.dispatchGroup.leave()
+        })
         
-        ldto2.fetchTranslate(word: data, from: from, to: to, completionHandler: completionHandler)
+        dispatchGroup.enter()
+        ldto3.fetchTranslate(word: data, from: from, to: to, completionHandler: { [weak self] result in
+            completionHandler(result)
+            self?.dispatchGroup.leave()
+        })
         
-        ldto3.fetchTranslate(word: data, from: from, to: to, completionHandler: completionHandler)
-        
-        ldto4.fetchTranslate(word: data, from: from, to: to, completionHandler: completionHandler)
-        
-        dispatchGroup.leave()
+        dispatchGroup.enter()
+        ldto4.fetchTranslate(word: data, from: from, to: to, completionHandler: { [weak self] result in
+            completionHandler(result)
+            self?.dispatchGroup.leave()
+        })
     }
 }

@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct LingvanexDTO: TranslateService{
+struct LingvanexDTO: TranslateService {
     
     private let apiUrl = lingvanexUrlString
     private let apiKey = lingvanexApiKey

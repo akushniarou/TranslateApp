@@ -3,15 +3,13 @@ import UIKit
 import CoreData
 
 protocol SaveCardView: class {
-    func getCell() -> UITableViewCell
     
 }
 
 class SavedCardController: UITableViewController {
     
     private var presenter: SavedCardPresenter = SavedPresenter()
-    private var tasks = [Task]()
-    private var cells =  SavedCardCell()
+    private var tasks = [CoreDataTask]()
     
     override internal func loadView() {
         super.loadView()
@@ -25,9 +23,7 @@ class SavedCardController: UITableViewController {
 }
 
 extension SavedCardController: SaveCardView {
-    internal func getCell() -> UITableViewCell {
-        return cells
-    }
+    
 }
 
 //MARK: - TableView settings
@@ -56,7 +52,7 @@ extension SavedCardController {
     }
     
     override internal func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let task = tasks[indexPath.row] as Task?, editingStyle == .delete else { return }
+        guard let task = tasks[indexPath.row] as CoreDataTask?, editingStyle == .delete else { return }
         
         context.delete(task)
         tasks.remove(at: indexPath.row)

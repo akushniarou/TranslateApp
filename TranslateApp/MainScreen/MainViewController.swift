@@ -11,24 +11,31 @@ protocol MainView: class {
 class MainViewController: UIViewController {
     
     private var presenter: MainViewPresenter = MainPresenter()
-    private var selectedCellContent: TranslateResult?
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var inputField: UITextField!
-    @IBOutlet private weak var languagePickerFrom: UIPickerView!
-    @IBOutlet private weak var languagePickerTo: UIPickerView!
+    @IBOutlet private weak var languagePickerFrom: ChoosePickerView!
+    @IBOutlet private weak var languagePickerTo: ChoosePickerView!
     
     
     override internal func viewDidLoad() {
         super.viewDidLoad()
         presenter.addView(view: self)
-        hideKeyboardWhenTappedAround() 
+        hideKeyboardWhenTappedAround()
+        languagePickerFrom.setData(presenter.getAllLanguages())
+        languagePickerFrom.didSelectAction = { [ weak self ] selected in
+            self?.presenter.setOriginal(language: selected)
+        }
+        languagePickerTo.setData(presenter.getAllLanguages())
+        languagePickerTo.didSelectAction = { [ weak self ] selected in
+            self?.presenter.setTarget(language: selected)
+        }
     }
     
     override internal func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? DetailedViewController {
             
-            controller.translatedWordFromTable = selectedCellContent
+            controller.translatedWordFromTable = presenter.selectedCellContent
         }
     }
     
@@ -74,12 +81,8 @@ extension MainViewController: MainView {
 //MARK: - tableView settings
 extension MainViewController: UITableViewDataSource {
     
-    internal func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getTranslationData().count
+        return presenter.getNumberOfTranslations()
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,32 +95,8 @@ extension MainViewController: UITableViewDataSource {
 //MARK: - content from selected cell
 extension MainViewController: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedCellContent = presenter.getTranslationData()[indexPath.row]
+        presenter.setSelected(index: indexPath.row)
         performSegue(withIdentifier: "toDetailedView", sender: self)
     }
 }
 
-//MARK: - pickerView settings
-extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    internal func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    internal func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return presenter.getAllLanguages().count
-    }
-    
-    internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return presenter.getAllLanguages()[row]
-    }
-    
-    internal func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == languagePickerFrom {
-            presenter.setOriginal(language: presenter.getAllLanguages()[row])
-        } else {
-            presenter.setTarget(language: presenter.getAllLanguages()[row])
-            
-        }
-    }
-}

@@ -1,23 +1,9 @@
 
 import Foundation
 
-/*
- языкПервода
- языкОригинала
- слово
- пеервод
- 
- 
- БД
- языкПервода
- языкОригинала
- слово
- пеервод
- имяИзображения
- */
-
 protocol MainViewPresenter {
     
+    var selectedCellContent: TranslateResult? { get }
     init()
     func addView(view: MainView)
     func getTranslation()
@@ -25,9 +11,10 @@ protocol MainViewPresenter {
     func getTranslationData() -> Array<TranslateResult>
     func getTargetLanguage() -> String
     func getOriginalLanguage() -> String
-    func setOriginal(language: String)
+    func setOriginal(language: String) //создать энам с таргетом языка
     func setTarget(language: String)
-    func getContextData()
+    func setSelected(index: Int)
+    func getNumberOfTranslations() -> Int
 }
 
 class MainPresenter: MainViewPresenter {
@@ -41,12 +28,12 @@ class MainPresenter: MainViewPresenter {
         case loading
         case error(String)
     }
-        
+    
+    private(set) var selectedCellContent: TranslateResult?
     private var translationData = [TranslateResult]()
     private var translateFrom = Language.english
     private var translateTo = Language.english
 
-    //    private let translateService: [TranslateService]!
     private var translationRequest = TranslateRequest()
     private weak var view: MainView?
     private var state: State = .normal {
@@ -54,7 +41,10 @@ class MainPresenter: MainViewPresenter {
             self.view?.didUpdateState(state)
         }
     }
-
+    
+    func setSelected(index: Int) {
+        selectedCellContent = getTranslationData()[index]
+    }
     
     //MARK: - MainViewPresenter protocol
     internal func getTargetLanguage() -> String {
@@ -113,13 +103,13 @@ class MainPresenter: MainViewPresenter {
         return translationData
     }
     
-    internal func getContextData() {
-        
-    }
-    
     private func addTranslated(word: TranslateResult) {
         translationData.append(word)
         view?.reloadData()
+    }
+    
+    func getNumberOfTranslations() -> Int {
+        return translationData.count
     }
 }
 
