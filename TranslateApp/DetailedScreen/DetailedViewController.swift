@@ -103,8 +103,8 @@ extension DetailedViewController: DetailedView {
     }
     
     internal  func getTranslationImage() -> Data? {
-        if let image = translationImage {
-            return image.pngData()
+        if translationImage != nil {
+            return translationImage!.pngData()
         } else {
             return nil
         }

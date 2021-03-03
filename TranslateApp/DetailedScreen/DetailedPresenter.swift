@@ -8,6 +8,8 @@ protocol DetailedViewPresenter{
 }
 
 class DetailedPresenter: DetailedViewPresenter{
+    
+    let storeService = DTOService()
 
     private weak var view: DetailedView?
     
@@ -19,12 +21,13 @@ class DetailedPresenter: DetailedViewPresenter{
     }
     
     internal func saveTask() {
-        let obj = CoreDataTask(context: context)
-        obj.enteredWord = view?.getOriginalWord()
-        obj.originalLanguage = view?.getOriginalLanguage()
-        obj.picture = view?.getTranslationImage()
-        obj.targetLanguage = view?.getTargetLanguage()
-        obj.translatedWord = view?.getTranslatedWord()
-        saveContext()
+        let enteredWord = (view?.getOriginalWord())!
+        let originalLanguage = (view?.getOriginalLanguage())!
+        let image = (view?.getTranslationImage())!
+        let targetLanguage = (view?.getTargetLanguage())!
+        let transWord = (view?.getTranslatedWord())!
+        let task = Task(enteredWord: enteredWord, originalLanguage: originalLanguage, targetLanguage: targetLanguage, translatedWord: transWord, picture: image)
+        
+        storeService.saveTask(task: task)
     }
 }
