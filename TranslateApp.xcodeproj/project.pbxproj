@@ -31,6 +31,8 @@
 		7A6BDC4F25CC39EC00E69447 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A6BDC4C25CC39EC00E69447 /* Assets.xcassets */; };
 		7A6BDC5025CC39EC00E69447 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A6BDC4D25CC39EC00E69447 /* LaunchScreen.storyboard */; };
 		7A9BC66C25EE5BE500D93E9B /* ChoosePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9BC66B25EE5BE500D93E9B /* ChoosePickerView.swift */; };
+		7A9BC67325EE8E7600D93E9B /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9BC67225EE8E7600D93E9B /* Task.swift */; };
+		7A9BC67625EE8F7200D93E9B /* DTOService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9BC67525EE8F7200D93E9B /* DTOService.swift */; };
 		7AD0D6EC25D2B833007F2EA7 /* LingvanexDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD0D6EB25D2B833007F2EA7 /* LingvanexDTO.swift */; };
 		7AF4794925DFA5F500D418B1 /* CDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF4794825DFA5F500D418B1 /* CDM.swift */; };
 		7AF954DA25E50818004C79AA /* GlobalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF954D925E50818004C79AA /* GlobalExtension.swift */; };
@@ -65,6 +67,8 @@
 		7A6BDC4C25CC39EC00E69447 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A6BDC4D25CC39EC00E69447 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A9BC66B25EE5BE500D93E9B /* ChoosePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePickerView.swift; sourceTree = "<group>"; };
+		7A9BC67225EE8E7600D93E9B /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		7A9BC67525EE8F7200D93E9B /* DTOService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOService.swift; sourceTree = "<group>"; };
 		7AD0D6EB25D2B833007F2EA7 /* LingvanexDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingvanexDTO.swift; sourceTree = "<group>"; };
 		7AF4794825DFA5F500D418B1 /* CDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDM.swift; sourceTree = "<group>"; };
 		7AF954D925E50818004C79AA /* GlobalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtension.swift; sourceTree = "<group>"; };
@@ -190,6 +194,8 @@
 		7A9BC66E25EE84D100D93E9B /* DTOService */ = {
 			isa = PBXGroup;
 			children = (
+				7A9BC67225EE8E7600D93E9B /* Task.swift */,
+				7A9BC67525EE8F7200D93E9B /* DTOService.swift */,
 			);
 			path = DTOService;
 			sourceTree = "<group>";
@@ -350,6 +356,8 @@
 				7A6BDC4525CC39D000E69447 /* SavedPresenter.swift in Sources */,
 				7A6BDC4825CC39D000E69447 /* FetchTranslate.swift in Sources */,
 				7AF954DA25E50818004C79AA /* GlobalExtension.swift in Sources */,
+				7A9BC67325EE8E7600D93E9B /* Task.swift in Sources */,
+				7A9BC67625EE8F7200D93E9B /* DTOService.swift in Sources */,
 				7A6BDC3F25CC39D000E69447 /* ParsedDataModel.swift in Sources */,
 				7A636B8225DBCD9F00A4FBAF /* LingvanexDTO4.swift in Sources */,
 				7A6BDC4225CC39D000E69447 /* MainViewController.swift in Sources */,
