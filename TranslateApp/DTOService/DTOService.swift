@@ -31,7 +31,6 @@ class DTOService: DTOProcessing {
         for task in try! context.fetch(fetchRequest) {
             result.append(Task(enteredWord: task.enteredWord!, originalLanguage: task.originalLanguage!, targetLanguage: task.targetLanguage!, translatedWord: task.translatedWord!, picture: task.picture!))
         }
-        
         return result
     }
     
