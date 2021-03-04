@@ -4,14 +4,13 @@ import Foundation
 protocol MainViewPresenter {
     
     var selectedCellContent: TranslateResult? { get }
-    init()
     func addView(view: MainView)
     func getTranslation()
     func getAllLanguages() -> Array<String>
     func getTranslationData() -> Array<TranslateResult>
     func getTargetLanguage() -> String
     func getOriginalLanguage() -> String
-    func setOriginal(language: String) //создать энам с таргетом языка
+    func setOriginal(language: String)
     func setTarget(language: String)
     func setSelected(index: Int)
     func getNumberOfTranslations() -> Int
@@ -19,10 +18,6 @@ protocol MainViewPresenter {
 
 class MainPresenter: MainViewPresenter {
     
-    required init() {
-        
-    }
-
     internal enum State {
         case normal
         case loading
@@ -33,7 +28,7 @@ class MainPresenter: MainViewPresenter {
     private var translationData = [TranslateResult]()
     private var translateFrom = Language.english
     private var translateTo = Language.english
-
+    
     private var translationRequest = TranslateRequest()
     private weak var view: MainView?
     private var state: State = .normal {
@@ -73,11 +68,8 @@ class MainPresenter: MainViewPresenter {
             to: translateTo,
             data: translatedWord
         ) { [weak self] translationResult in
-            
-            DispatchQueue.main.async {
-                self?.addTranslated(word: translationResult)
-                self?.state = .normal
-            }
+            self?.addTranslated(word: translationResult)
+            self?.state = .normal
         }
     }
     
@@ -105,7 +97,9 @@ class MainPresenter: MainViewPresenter {
     
     private func addTranslated(word: TranslateResult) {
         translationData.append(word)
-        view?.reloadData()
+        DispatchQueue.main.async{
+            self.view?.reloadData()
+        }
     }
     
     func getNumberOfTranslations() -> Int {

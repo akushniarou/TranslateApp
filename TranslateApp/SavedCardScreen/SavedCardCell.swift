@@ -8,5 +8,4 @@ class SavedCardCell: UITableViewCell {
     @IBOutlet weak var originalWord: UILabel!
     @IBOutlet weak var translatedWord: UILabel!
     @IBOutlet weak var explanatoryPicture: UIImageView!
-    
 }
