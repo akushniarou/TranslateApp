@@ -6,12 +6,13 @@ protocol DetailedView: class {
     func getTargetLanguage() -> String
     func getOriginalWord() -> String
     func getTranslatedWord() -> String
-    func getTranslationImage() -> Data?
+    func getTranslationImage() -> Data
 }
 
 class DetailedViewController: UIViewController {
     
-    internal var translatedWordFromTable: TranslateResult?
+//    вынести в презентер
+    internal var translatedWordFromTable: TranslateResult!
     
     @IBOutlet private weak var originalLanguage: UILabel!
     @IBOutlet private weak var targetLanguage: UILabel!
@@ -34,7 +35,7 @@ class DetailedViewController: UIViewController {
     override internal func viewDidLoad() {
         super.viewDidLoad()
         presenter.addView(view: self)
-        
+//        в презентор
         originalLanguage.text = translatedWordFromTable?.fromLanguage.title
         targetLanguage.text = translatedWordFromTable?.translateLanguage.title
         originalWord.text = translatedWordFromTable?.translated
@@ -47,28 +48,27 @@ class DetailedViewController: UIViewController {
     }
 }
 
-extension DetailedViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//MARK: - action controler setup
+extension DetailedViewController: UIImagePickerControllerDelegate {
     
     @IBAction private func choosePictureButton(_ sender: UIButton) {
         
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let picture = UIAlertAction(title: "Picture", style: .default) { _ in
-            self.chooseImagePicker(source: .photoLibrary)
+        let picture = UIAlertAction(title: "Picture", style: .default) { [self] _ in
+            chooseImagePicker(source: .photoLibrary)
         }
         
-        let camera = UIAlertAction(title: "Camera", style: .default) { _ in
-            self.chooseImagePicker(source: .camera)
+        let camera = UIAlertAction(title: "Camera", style: .default) { [self] _ in
+            chooseImagePicker(source: .camera)
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         
-        actionSheet.addAction(picture) //вынести в экстэншн
-        actionSheet.addAction(camera)
-        actionSheet.addAction(cancel)
-        
-        present(actionSheet, animated: true)
+        setupAction(style: .actionSheet, firstAction: picture, secondAction: camera, cancelAction: cancel)
     }
+}
+
+//MARK: - image picker setup
+extension DetailedViewController: UINavigationControllerDelegate {
     
     private func chooseImagePicker(source: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
@@ -87,27 +87,22 @@ extension DetailedViewController: UIImagePickerControllerDelegate, UINavigationC
 extension DetailedViewController: DetailedView {
     
     internal func getOriginalLanguage() -> String {
-        translatedWordFromTable?.fromLanguage.title ?? ""
+        translatedWordFromTable.fromLanguage.title
     }
     
     internal func getTargetLanguage() -> String {
-        translatedWordFromTable?.translateLanguage.title ?? ""
+        translatedWordFromTable.translateLanguage.title
     }
     
     internal func getOriginalWord() -> String {
-        translatedWordFromTable?.translated ?? ""
+        translatedWordFromTable.translated
     }
     
     internal  func getTranslatedWord() -> String {
-        translatedWordFromTable?.result ?? ""
+        translatedWordFromTable.result
     }
     
-    internal  func getTranslationImage() -> Data? {
-        if translationImage != nil {
-            return translationImage!.pngData()
-        } else {
-            return nil
-        }
+    internal  func getTranslationImage() -> Data {
+        translationImage!.pngData()!
     }
 }
-

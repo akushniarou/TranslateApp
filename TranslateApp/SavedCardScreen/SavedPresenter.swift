@@ -4,16 +4,19 @@ import Foundation
 protocol SavedCardPresenter{
     init()
     func addView(view: SaveCardView)
-    func addExistingCards(tasks: [Task])
-    func getObjects() -> [Task]
-    func removeCard(card: Task)
+    func getObjectsCount() -> Int
+    func removeCard(row: Int)
+    func getTaskByRow(row: Int) -> Task
 }
 
 class SavedPresenter: SavedCardPresenter {
 
     private let storeService = DTOService()
-    internal let savedCard = SavedCardCell()
-    internal var savedCards = [String]()
+    
+//    перенести в контроллер
+    private let savedCard = SavedCardCell()
+    private var savedCards = [String]()
+    private var tasks = [Task]()
     
     private weak var view: SaveCardView?
     
@@ -22,18 +25,19 @@ class SavedPresenter: SavedCardPresenter {
     }
     
     required init() {
+        self.tasks = storeService.getStoredTasks()
     }
     
-    internal func addExistingCards(tasks: [Task]) {
-        
+    internal func removeCard(row: Int) {
+        storeService.deleteTask(task: tasks[row])
+        tasks.remove(at: row)
     }
     
-    internal func getObjects() -> [Task] {
-        let objects = storeService.getStoredTasks()
-        return objects
+    internal func getObjectsCount() -> Int {
+        return tasks.count
     }
     
-    internal func removeCard(card: Task) {
-        storeService.deleteTask(task: card)
+    internal func getTaskByRow(row: Int) -> Task {
+        return tasks[row]
     }
 }

@@ -2,22 +2,18 @@
 import Foundation
 
 protocol DetailedViewPresenter{
-    init()
     func addView(view: DetailedView)
     func saveTask()
 }
 
 class DetailedPresenter: DetailedViewPresenter{
     
-    let storeService = DTOService()
+    private lazy var storeService = DTOService()
 
     private weak var view: DetailedView?
     
     internal func addView(view: DetailedView) {
         self.view = view
-    }
-    
-    required init() {
     }
     
     internal func saveTask() {

@@ -27,6 +27,7 @@ class DTOService: DTOProcessing {
     public func getStoredTasks() -> [Task] {
         var result: [Task] = []
         let fetchRequest: NSFetchRequest<CoreDataTask> = CoreDataTask.fetchRequest()
+//        переделать без форс анврапа
         for task in try! context.fetch(fetchRequest) {
             result.append(Task(enteredWord: task.enteredWord!, originalLanguage: task.originalLanguage!, targetLanguage: task.targetLanguage!, translatedWord: task.translatedWord!, picture: task.picture!))
         }

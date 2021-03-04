@@ -65,6 +65,7 @@ extension MainViewController: MainView {
         }
     }
     
+//сделать с опционалом
     internal func getTextForTranslation() -> String {
         return inputField.text?.lowercased() ?? ""
     }
