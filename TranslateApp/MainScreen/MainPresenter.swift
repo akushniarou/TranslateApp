@@ -17,7 +17,7 @@ protocol MainViewPresenter {
 }
 
 class MainPresenter: MainViewPresenter {
-    
+
     internal enum State {
         case normal
         case loading
@@ -28,7 +28,7 @@ class MainPresenter: MainViewPresenter {
     private var translationData = [TranslateResult]()
     private var translateFrom = Language.english
     private var translateTo = Language.english
-    
+
     private var translationRequest = TranslateRequest()
     private weak var view: MainView?
     private var state: State = .normal {
@@ -68,8 +68,11 @@ class MainPresenter: MainViewPresenter {
             to: translateTo,
             data: translatedWord
         ) { [weak self] translationResult in
-            self?.addTranslated(word: translationResult)
-            self?.state = .normal
+            
+            DispatchQueue.main.async {
+                self?.addTranslated(word: translationResult)
+                self?.state = .normal
+            }
         }
     }
     
@@ -97,9 +100,7 @@ class MainPresenter: MainViewPresenter {
     
     private func addTranslated(word: TranslateResult) {
         translationData.append(word)
-        DispatchQueue.main.async{
-            self.view?.reloadData()
-        }
+        view?.reloadData()
     }
     
     func getNumberOfTranslations() -> Int {
