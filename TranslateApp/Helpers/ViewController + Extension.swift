@@ -13,7 +13,6 @@ extension UIViewController {
         view.endEditing(true)
     }
 
-//
     func setupAction(title: String? = nil, message: String? = nil, style: UIAlertController.Style, firstAction: UIAlertAction?, secondAction: UIAlertAction?, cancelAction: UIAlertAction) {
         
         let actionSheet = UIAlertController(title: title, message: message, preferredStyle: style)

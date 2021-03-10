@@ -1,5 +1,5 @@
 
-import Foundation
+import UIKit
 import CoreData
 
 protocol DTOProcessing {
@@ -12,7 +12,7 @@ class DTOService: DTOProcessing {
     
     let container: NSPersistentContainer
     let context: NSManagedObjectContext
-    
+    private let image = UIImage(named: "noData")?.pngData()
     
     init(){
         container = NSPersistentContainer(name: "TranslateApp")
@@ -27,18 +27,26 @@ class DTOService: DTOProcessing {
     public func getStoredTasks() -> [Task] {
         var result: [Task] = []
         let fetchRequest: NSFetchRequest<CoreDataTask> = CoreDataTask.fetchRequest()
-//        переделать без форс анврапа
         for task in try! context.fetch(fetchRequest) {
-            result.append(Task(enteredWord: task.enteredWord!, originalLanguage: task.originalLanguage!, targetLanguage: task.targetLanguage!, translatedWord: task.translatedWord!, picture: task.picture!))
+            if let pathString = task.picture {
+                let imageFromDB = getImageData(with: pathString)
+                result.append(Task(enteredWord: task.enteredWord ?? "", originalLanguage: task.originalLanguage ?? "", targetLanguage: task.targetLanguage ?? "", translatedWord: task.translatedWord ?? "", picture: imageFromDB ?? image!))
+            }
         }
         return result
     }
     
     public func saveTask(task: Task) {
         let nsTask = CoreDataTask(context: context)
+        let date = Int(Date().timeIntervalSince1970)
+        let name = "\(date).png"
         nsTask.enteredWord = task.enteredWord
         nsTask.originalLanguage = task.originalLanguage
-        nsTask.picture = task.picture
+        if let pictureURI = saveImage(with: name, data: task.picture) {
+            nsTask.picture = pictureURI
+        } else {
+            print("can't save image")
+        }
         nsTask.targetLanguage = task.targetLanguage
         nsTask.translatedWord = task.translatedWord
         

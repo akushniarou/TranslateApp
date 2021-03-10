@@ -17,7 +17,7 @@ protocol MainViewPresenter {
 }
 
 class MainPresenter: MainViewPresenter {
-
+    
     internal enum State {
         case normal
         case loading
@@ -28,7 +28,7 @@ class MainPresenter: MainViewPresenter {
     private var translationData = [TranslateResult]()
     private var translateFrom = Language.english
     private var translateTo = Language.english
-
+    
     private var translationRequest = TranslateRequest()
     private weak var view: MainView?
     private var state: State = .normal {
@@ -37,7 +37,7 @@ class MainPresenter: MainViewPresenter {
         }
     }
     
-    func setSelected(index: Int) {
+    internal func setSelected(index: Int) {
         selectedCellContent = getTranslationData()[index]
     }
     
@@ -55,25 +55,24 @@ class MainPresenter: MainViewPresenter {
     }
     
     internal func getTranslation() {
-        guard let translatedWord = view?.getTextForTranslation(),
-              !translatedWord.isEmpty
-        else { return }
         
-        translationData.removeAll()
-        view?.reloadData()
-        
-        self.state = .loading
-        translationRequest.fetchTranslate(
-            from: translateFrom,
-            to: translateTo,
-            data: translatedWord
-        ) { [weak self] translationResult in
+        let originalWord = view?.getTextForTranslation() 
             
-            DispatchQueue.main.async {
-                self?.addTranslated(word: translationResult)
-                self?.state = .normal
+            translationData.removeAll()
+            view?.reloadData()
+            
+            self.state = .loading
+            translationRequest.fetchTranslate(
+                from: translateFrom,
+                to: translateTo,
+                data: originalWord!
+            ) { [weak self] translationResult in
+                
+                DispatchQueue.main.async {
+                    self?.addTranslated(word: translationResult)
+                    self?.state = .normal
+                }
             }
-        }
     }
     
     internal func getAllLanguages() -> Array<String> {
@@ -103,7 +102,7 @@ class MainPresenter: MainViewPresenter {
         view?.reloadData()
     }
     
-    func getNumberOfTranslations() -> Int {
+    internal func getNumberOfTranslations() -> Int {
         return translationData.count
     }
 }

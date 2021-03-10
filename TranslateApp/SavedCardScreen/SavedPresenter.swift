@@ -13,8 +13,6 @@ class SavedPresenter: SavedCardPresenter {
 
     private let storeService = DTOService()
     
-//    перенести в контроллер
-    private let savedCard = SavedCardCell()
     private var savedCards = [String]()
     private var tasks = [Task]()
     

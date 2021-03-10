@@ -3,7 +3,7 @@
     <entity name="CoreDataTask" representedClassName=".CoreDataTask" syncable="YES" codeGenerationType="class">
         <attribute name="enteredWord" optional="YES" attributeType="String"/>
         <attribute name="originalLanguage" optional="YES" attributeType="String"/>
-        <attribute name="picture" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="picture" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="targetLanguage" optional="YES" attributeType="String"/>
         <attribute name="translatedWord" optional="YES" attributeType="String"/>
     </entity>

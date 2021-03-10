@@ -2,6 +2,10 @@
 import UIKit
 
 protocol DetailedView: class {
+    var originalLanguage: UILabel! { get }
+    var targetLanguage: UILabel! { get }
+    var originalWord: UILabel! { get }
+    var translatedWord: UILabel! { get }
     func getOriginalLanguage() -> String
     func getTargetLanguage() -> String
     func getOriginalWord() -> String
@@ -11,13 +15,10 @@ protocol DetailedView: class {
 
 class DetailedViewController: UIViewController {
     
-//    вынести в презентер
-    internal var translatedWordFromTable: TranslateResult!
-    
-    @IBOutlet private weak var originalLanguage: UILabel!
-    @IBOutlet private weak var targetLanguage: UILabel!
-    @IBOutlet private weak var originalWord: UILabel!
-    @IBOutlet private weak var translatedWord: UILabel!
+    @IBOutlet internal weak var originalLanguage: UILabel!
+    @IBOutlet internal weak var targetLanguage: UILabel!
+    @IBOutlet internal weak var originalWord: UILabel!
+    @IBOutlet internal weak var translatedWord: UILabel!
     @IBOutlet private weak var image: UIImageView!
     @IBOutlet private weak var saveButon: UIButton!
     
@@ -30,16 +31,13 @@ class DetailedViewController: UIViewController {
             saveButon.isHidden = translationImage == nil
         }
     }
-    private var presenter: DetailedViewPresenter = DetailedPresenter()
+    
+    internal var presenter: DetailedViewPresenter = DetailedPresenter()
     
     override internal func viewDidLoad() {
         super.viewDidLoad()
         presenter.addView(view: self)
-//        в презентор
-        originalLanguage.text = translatedWordFromTable?.fromLanguage.title
-        targetLanguage.text = translatedWordFromTable?.translateLanguage.title
-        originalWord.text = translatedWordFromTable?.translated
-        translatedWord.text = translatedWordFromTable?.result
+        presenter.setCellColumns()
     }
     
     @IBAction private func saveButton(_ sender: UIButton) {
@@ -87,19 +85,19 @@ extension DetailedViewController: UINavigationControllerDelegate {
 extension DetailedViewController: DetailedView {
     
     internal func getOriginalLanguage() -> String {
-        translatedWordFromTable.fromLanguage.title
+        presenter.translatedWordFromTable.fromLanguage.title
     }
     
     internal func getTargetLanguage() -> String {
-        translatedWordFromTable.translateLanguage.title
+        presenter.translatedWordFromTable.translateLanguage.title
     }
     
     internal func getOriginalWord() -> String {
-        translatedWordFromTable.translated
+        presenter.translatedWordFromTable.translated
     }
     
     internal  func getTranslatedWord() -> String {
-        translatedWordFromTable.result
+        presenter.translatedWordFromTable.result
     }
     
     internal  func getTranslationImage() -> Data {
