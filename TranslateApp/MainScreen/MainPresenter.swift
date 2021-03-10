@@ -37,7 +37,7 @@ class MainPresenter: MainViewPresenter {
         }
     }
     
-    func setSelected(index: Int) {
+    internal func setSelected(index: Int) {
         selectedCellContent = getTranslationData()[index]
     }
     
@@ -55,22 +55,24 @@ class MainPresenter: MainViewPresenter {
     }
     
     internal func getTranslation() {
-        guard let translatedWord = view?.getTextForTranslation(),
-              !translatedWord.isEmpty
-        else { return }
         
-        translationData.removeAll()
-        view?.reloadData()
-        
-        self.state = .loading
-        translationRequest.fetchTranslate(
-            from: translateFrom,
-            to: translateTo,
-            data: translatedWord
-        ) { [weak self] translationResult in
-            self?.addTranslated(word: translationResult)
-            self?.state = .normal
-        }
+        let originalWord = view?.getTextForTranslation() 
+            
+            translationData.removeAll()
+            view?.reloadData()
+            
+            self.state = .loading
+            translationRequest.fetchTranslate(
+                from: translateFrom,
+                to: translateTo,
+                data: originalWord!
+            ) { [weak self] translationResult in
+                
+                DispatchQueue.main.async {
+                    self?.addTranslated(word: translationResult)
+                    self?.state = .normal
+                }
+            }
     }
     
     internal func getAllLanguages() -> Array<String> {
@@ -97,12 +99,10 @@ class MainPresenter: MainViewPresenter {
     
     private func addTranslated(word: TranslateResult) {
         translationData.append(word)
-        DispatchQueue.main.async{
-            self.view?.reloadData()
-        }
+        view?.reloadData()
     }
     
-    func getNumberOfTranslations() -> Int {
+    internal func getNumberOfTranslations() -> Int {
         return translationData.count
     }
 }

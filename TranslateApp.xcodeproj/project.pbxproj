@@ -15,6 +15,7 @@
 		7A636B7C25DBCD8A00A4FBAF /* LingvanexDTO2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A636B7B25DBCD8A00A4FBAF /* LingvanexDTO2.swift */; };
 		7A636B7F25DBCD9600A4FBAF /* LingvanexDTO3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A636B7E25DBCD9600A4FBAF /* LingvanexDTO3.swift */; };
 		7A636B8225DBCD9F00A4FBAF /* LingvanexDTO4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A636B8125DBCD9F00A4FBAF /* LingvanexDTO4.swift */; };
+		7A644FE125F775C200B86D70 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A644FE025F775C200B86D70 /* ImageFileManager.swift */; };
 		7A6BDC1725CC399B00E69447 /* TranslateApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A6BDC1525CC399B00E69447 /* TranslateApp.xcdatamodeld */; };
 		7A6BDC3C25CC39D000E69447 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6BDC2A25CC39D000E69447 /* AppDelegate.swift */; };
 		7A6BDC3D25CC39D000E69447 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6BDC2B25CC39D000E69447 /* SceneDelegate.swift */; };
@@ -48,6 +49,7 @@
 		7A636B7B25DBCD8A00A4FBAF /* LingvanexDTO2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingvanexDTO2.swift; sourceTree = "<group>"; };
 		7A636B7E25DBCD9600A4FBAF /* LingvanexDTO3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingvanexDTO3.swift; sourceTree = "<group>"; };
 		7A636B8125DBCD9F00A4FBAF /* LingvanexDTO4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingvanexDTO4.swift; sourceTree = "<group>"; };
+		7A644FE025F775C200B86D70 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 		7A6BDC0925CC399B00E69447 /* TranslateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A6BDC1625CC399B00E69447 /* TranslateApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TranslateApp.xcdatamodel; sourceTree = "<group>"; };
 		7A6BDC1D25CC399C00E69447 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			children = (
 				7A9BC67225EE8E7600D93E9B /* Task.swift */,
 				7A9BC67525EE8F7200D93E9B /* DTOService.swift */,
+				7A644FE025F775C200B86D70 /* ImageFileManager.swift */,
 			);
 			path = DTOService;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				7A1812AB25DD147C0049A570 /* DetailedViewController.swift in Sources */,
 				7A6BDC4725CC39D000E69447 /* ParseResponse.swift in Sources */,
 				7A6BDC4025CC39D000E69447 /* UploadDataModel.swift in Sources */,
+				7A644FE125F775C200B86D70 /* ImageFileManager.swift in Sources */,
 				7A636B7F25DBCD9600A4FBAF /* LingvanexDTO3.swift in Sources */,
 				7A6BDC4625CC39D000E69447 /* Lingvanex.swift in Sources */,
 				7A6BDC3D25CC39D000E69447 /* SceneDelegate.swift in Sources */,

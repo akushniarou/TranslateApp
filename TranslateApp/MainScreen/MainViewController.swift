@@ -5,7 +5,8 @@ protocol MainView: class {
     func reloadData()
     
     func didUpdateState(_ state: MainPresenter.State)
-    func getTextForTranslation() -> String
+    func getTextForTranslation() -> String?
+    func getInputField() -> UITextField
 }
 
 class MainViewController: UIViewController {
@@ -34,13 +35,16 @@ class MainViewController: UIViewController {
     
     override internal func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? DetailedViewController {
-            
-            controller.translatedWordFromTable = presenter.selectedCellContent
+            controller.presenter.setTranslatedWordFromTable(tr: presenter.selectedCellContent!)
         }
     }
     
     @IBAction private func getTranslation(_ sender: Any) {
-        presenter.getTranslation()
+        if inputField.text == "" {
+            inputField.placeholder = "Enter a word for translation"
+        } else {
+            presenter.getTranslation()
+        }
     }
 }
 
@@ -63,11 +67,15 @@ extension MainViewController: MainView {
             tableView.backgroundView = label
             print(error)
         }
+        
     }
     
-//сделать с опционалом
-    internal func getTextForTranslation() -> String {
-        return inputField.text?.lowercased() ?? ""
+    internal func getInputField() -> UITextField {
+        return inputField
+    }
+    
+    internal func getTextForTranslation() -> String? {
+        return inputField.text?.lowercased()
     }
     
     internal func reloadData() {
