@@ -106,13 +106,6 @@
 			path = DetailedScreen;
 			sourceTree = "<group>";
 		};
-		7A22E28E25DEA8E200C21427 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		7A636B8425DBDAB300A4FBAF /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				7A9BC66E25EE84D100D93E9B /* DTOService */,
-				7A22E28E25DEA8E200C21427 /* CoreData */,
 				7A6BDC3725CC39D000E69447 /* Constants */,
 				7A6BDC2925CC39D000E69447 /* Helpers */,
 				7AD0D6EE25D2B996007F2EA7 /* ApiModel */,

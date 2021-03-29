@@ -21,7 +21,6 @@ func saveImage(with name: String, data: Data) -> String? {
     }
 }
 
-//MARK: - Create directory
 func createDirectory() -> Bool {
     let documentsPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
     guard let imagesPath = documentsPath.appendingPathComponent("images") else {return false}
